@@ -1,0 +1,49 @@
+import { getServerSideSitemap } from 'next-sitemap'
+import { getPayload } from 'payload'
+import config from '@payload-config'
+import { unstable_cache } from 'next/cache'
+
+const getCaseStudiesSitemap = unstable_cache(
+  async () => {
+    const payload = await getPayload({ config })
+    const SITE_URL =
+      process.env.NEXT_PUBLIC_SERVER_URL ||
+      process.env.VERCEL_PROJECT_PRODUCTION_URL ||
+      'https://mastertechsolutionscenter.com'
+
+    const results = await payload.find({
+      collection: 'case-studies',
+      overrideAccess: false,
+      depth: 0,
+      limit: 1000,
+      pagination: false,
+      select: {
+        slug: true,
+        updatedAt: true,
+      },
+    })
+
+    const dateFallback = new Date().toISOString()
+
+    const sitemap = results.docs
+      ? results.docs
+          .filter((doc) => Boolean(doc?.slug))
+          .map((doc) => ({
+            loc: `${SITE_URL}/case-studies/${doc?.slug}`,
+            lastmod: doc.updatedAt || dateFallback,
+          }))
+      : []
+
+    return sitemap
+  },
+  ['case-studies-sitemap'],
+  {
+    tags: ['case-studies-sitemap'],
+  },
+)
+
+export async function GET() {
+  const sitemap = await getCaseStudiesSitemap()
+
+  return getServerSideSitemap(sitemap)
+}
