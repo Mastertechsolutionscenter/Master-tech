@@ -108,14 +108,5 @@ export default buildConfig({
       },
     },
     tasks: [weeklyLeadReport],
-    schedules: [
-      {
-        task: 'weeklyLeadReport',
-        cron: '0 8 * * 1', // Every Monday at 8 AM
-        input: {
-          recipientEmail: 'info@mastertechsolutionscenter.com',
-        },
-      },
-    ],
   },
 })

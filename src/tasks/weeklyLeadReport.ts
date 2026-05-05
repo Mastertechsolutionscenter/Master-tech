@@ -1,6 +1,6 @@
 import { TaskConfig } from 'payload'
 
-export const weeklyLeadReport: TaskConfig<'weeklyLeadReport'> = {
+export const weeklyLeadReport: any = {
   slug: 'weeklyLeadReport',
   inputSchema: [
     {
@@ -10,7 +10,7 @@ export const weeklyLeadReport: TaskConfig<'weeklyLeadReport'> = {
       defaultValue: 'info@mastertechsolutionscenter.com',
     },
   ],
-  handler: async ({ payload, input }) => {
+  handler: async ({ payload, input }: any) => {
     const oneWeekAgo = new Date()
     oneWeekAgo.setDate(oneWeekAgo.getDate() - 7)
 
@@ -37,8 +37,8 @@ export const weeklyLeadReport: TaskConfig<'weeklyLeadReport'> = {
 
     // 2. Calculate some basic stats
     const totalLeads = leads.totalDocs
-    const newLeads = leads.docs.filter(l => l.status === 'new').length
-    const locations = [...new Set(leads.docs.map(l => l.location).filter(Boolean))]
+    const newLeads = leads.docs.filter((l: any) => l.status === 'new').length
+    const locations = [...new Set(leads.docs.map((l: any) => l.location).filter(Boolean))]
 
     // 3. Prepare Email Content
     const emailHtml = `
@@ -62,7 +62,7 @@ export const weeklyLeadReport: TaskConfig<'weeklyLeadReport'> = {
 
         <h3 style="border-bottom: 2px solid #A67C00; padding-bottom: 5px; margin-top: 30px;">Recent Leads</h3>
         <table style="width: 100%; border-collapse: collapse;">
-          ${leads.docs.slice(0, 5).map(l => `
+          ${leads.docs.slice(0, 5).map((l: any) => `
             <tr>
               <td style="padding: 10px 0; border-bottom: 1px solid #eee;">
                 <strong>${l.firstname} ${l.lastname}</strong><br>

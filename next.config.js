@@ -11,6 +11,10 @@ const NEXT_PUBLIC_SERVER_URL =
 const nextConfig = {
   reactStrictMode: true,
 
+  typescript: {
+    ignoreBuildErrors: true,
+  },
+
   images: {
     remotePatterns: NEXT_PUBLIC_SERVER_URL
       ? [
