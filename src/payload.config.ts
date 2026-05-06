@@ -31,6 +31,7 @@ import { weeklyLeadReport } from './tasks/weeklyLeadReport'
 
 const filename = fileURLToPath(import.meta.url)
 const dirname = path.dirname(filename)
+console.log('MONGODB_URI:', process.env.MONGODB_URI)
 
 export default buildConfig({
   admin: {
