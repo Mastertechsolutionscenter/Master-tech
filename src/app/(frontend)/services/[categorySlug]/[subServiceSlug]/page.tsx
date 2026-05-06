@@ -14,17 +14,24 @@ interface PageProps {
 
 export default async function SubServicePage({ params }: PageProps) {
   const { categorySlug, subServiceSlug } = await params
-  const payload = await getPayload({ config: configPromise })
+  
+  let subService: any = null
+  
+  try {
+    const payload = await getPayload({ config: configPromise })
 
-  // 1. Try to fetch from Payload CMS
-  const { docs: subServices } = await payload.find({
-    collection: 'sub-services',
-    where: {
-      slug: { equals: subServiceSlug },
-    },
-  })
+    // 1. Try to fetch from Payload CMS
+    const { docs: subServices } = await payload.find({
+      collection: 'sub-services',
+      where: {
+        slug: { equals: subServiceSlug },
+      },
+    })
 
-  let subService: any = subServices?.[0]
+    subService = subServices?.[0]
+  } catch (error) {
+    console.error(`Error fetching sub-service for slug "${subServiceSlug}":`, error)
+  }
 
   if (!subService) notFound()
 

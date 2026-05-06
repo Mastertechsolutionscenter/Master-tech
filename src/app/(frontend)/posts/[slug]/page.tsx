@@ -58,8 +58,8 @@ export default async function Post({
           {post.relatedPosts && post.relatedPosts.length > 0 && (
             <RelatedPosts
               className="mt-12 max-w-[52rem]"
-              docs={post.relatedPosts.filter(
-                (post) => typeof post === 'object',
+              docs={(post.relatedPosts || []).filter(
+                (post) => post && typeof post === 'object',
               )}
             />
           )}

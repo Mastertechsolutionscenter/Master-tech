@@ -78,7 +78,7 @@ export default async function ServiceCategoryPage({ params }: PageProps) {
     notFound()
   }
 
-  const faqs = await getFAQsAction(service.id)
+  const faqs = service?.id ? await getFAQsAction(service.id) : []
 
   const processData = service.processSection?.steps?.map((step: any) => ({
     title: step.title,
@@ -226,7 +226,7 @@ export default async function ServiceCategoryPage({ params }: PageProps) {
         </SectionBackground>
 
         {/* SOLUTIONS SECTION */}
-        {service.solutions?.items && service.solutions.items.length > 0 && (
+        {service.solutions?.items && (service.solutions.items || []).length > 0 && (
           <SectionBackground image={service.solutions.backgroundImage} className="py-24 bg-neutral-50 dark:bg-zinc-900/50">
             <div className="w-11/12 lg:w-4/5 mx-auto">
               <div className="text-center mb-16 max-w-3xl mx-auto">
@@ -240,7 +240,7 @@ export default async function ServiceCategoryPage({ params }: PageProps) {
                 )}
               </div>
               <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">
-                {service.solutions.items.map((item: any, idx: number) => (
+                {(service.solutions.items || []).map((item: any, idx: number) => (
                   <div key={idx} className="relative group">
                     <GlowingEffect
                       blur={0}
@@ -292,7 +292,7 @@ export default async function ServiceCategoryPage({ params }: PageProps) {
                   {service.whyChooseUs?.title || "Why Choose Master Tech"}
                 </h2>
                 <div className="space-y-8">
-                  {service.whyChooseUs?.points?.map((point: any, idx: number) => (
+                  {(service.whyChooseUs?.points || []).map((point: any, idx: number) => (
                     <div key={idx} className="flex gap-6">
                       <div className="w-12 h-12 rounded-xl bg-[#A67C00] flex items-center justify-center shrink-0">
                         <ShieldCheck className="w-6 h-6 text-white" />
@@ -310,7 +310,7 @@ export default async function ServiceCategoryPage({ params }: PageProps) {
                   {service.benefits?.title || "Key Benefits"}
                 </h2>
                 <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
-                  {service.benefits?.items?.map((item: any, idx: number) => (
+                  {(service.benefits?.items || []).map((item: any, idx: number) => (
                     <div key={idx} className="p-6 rounded-2xl bg-zinc-900 border border-zinc-800 hover:border-[#A67C00] transition-colors">
                       <CheckCircle2 className="w-8 h-8 text-[#A67C00] mb-4" />
                       <h4 className="font-bold mb-2">{item.title}</h4>

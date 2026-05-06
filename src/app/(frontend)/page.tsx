@@ -43,22 +43,35 @@ export const metadata: Metadata = {
 }
 
 export default async function Page() {
-  const payload = await getPayload({ config })
-  const homePages = await payload.find({
-    collection: 'pages',
-    where: {
-      slug: {
-        equals: 'home',
-      },
-    },
-  })
+  let layout = []
 
-  const homePage = homePages.docs[0]
-  const layout = homePage?.layout || []
+  try {
+    const payload = await getPayload({ config })
+    const homePages = await payload.find({
+      collection: 'pages',
+      where: {
+        slug: {
+          equals: 'home',
+        },
+      },
+    })
+
+    const homePage = homePages.docs[0]
+    layout = homePage?.layout || []
+  } catch (error) {
+    console.error('Error fetching home page data:', error)
+  }
 
   return (
     <div className="pb-24">
-      <RenderBlocks blocks={layout} />
+      {layout.length > 0 ? (
+        <RenderBlocks blocks={layout} />
+      ) : (
+        <div className="container pt-32 text-center">
+          <h1>Welcome to Master Tech Solutions Center</h1>
+          <p>Please log in to the admin panel to seed your content.</p>
+        </div>
+      )}
     </div>
   )
 }
