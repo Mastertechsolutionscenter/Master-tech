@@ -16,10 +16,11 @@ const createPagesFromGlobals = async () => {
 
   payload.logger.info('Creating About Us and Contact Us pages from globals...')
 
-  const aboutGlobals: any = await payload.findGlobal({ slug: 'about' })
-  const contactGlobals: any = await payload.findGlobal({ slug: 'contact' })
+  // Cast once at the top to clear IDE property errors
+  const aboutGlobals = (await payload.findGlobal({ slug: 'about' })) as any
+  const contactGlobals = (await payload.findGlobal({ slug: 'contact' })) as any
 
-  // Fetch a default image. If none exist, we might have validation errors for required images.
+  // Fetch a default image.
   const media = await payload.find({ collection: 'media', limit: 1 })
   const defaultImageId = media.docs.length > 0 ? media.docs[0].id : null
 
@@ -53,11 +54,10 @@ const createPagesFromGlobals = async () => {
       },
     ]
 
-    // Only add values if they exist
     if ((aboutGlobals.values?.length ?? 0) > 0) {
       layout.push({
         blockType: 'values',
-        title: '', // Remove hardcoded 'Our Core Values'
+        title: '',
         points: aboutGlobals.values.map((v: any) => ({
           title: v.title,
           description: v.description,
@@ -75,11 +75,10 @@ const createPagesFromGlobals = async () => {
       image: defaultImageId,
     })
 
-    // Journey Block requires at least 3 steps. Only add if Global has at least 3.
     if ((aboutGlobals.journey?.length ?? 0) >= 3) {
       layout.push({
         blockType: 'journey',
-        title: '', // Remove hardcoded 'Our Journey'
+        title: '',
         subtitle: '',
         steps: aboutGlobals.journey.map((j: any) => ({
           title: j.title,
@@ -89,7 +88,6 @@ const createPagesFromGlobals = async () => {
       })
     }
 
-    // Only add techStack if it has technologies
     if ((aboutGlobals.techStack?.technologies?.length ?? 0) > 0) {
       layout.push({
         blockType: 'techStack',
@@ -133,17 +131,17 @@ const createPagesFromGlobals = async () => {
       },
       {
         blockType: 'contactFormBlock',
-        title: '', // Removed 'Contact Information'
+        title: '',
         description: contactGlobals.description,
         contactInfo: {
-          phone: (contactGlobals as any).contactInfo?.phone,
-          email: (contactGlobals as any).contactInfo?.email,
-          address: (contactGlobals as any).contactInfo?.address,
-          whatsappNumber: (contactGlobals as any).contactInfo?.whatsappNumber,
+          phone: contactGlobals.contactInfo?.phone,
+          email: contactGlobals.contactInfo?.email,
+          address: contactGlobals.contactInfo?.address,
+          whatsappNumber: contactGlobals.contactInfo?.whatsappNumber,
         },
         nextSteps:
-          ((contactGlobals as any).nextSteps?.length ?? 0) > 0
-            ? (contactGlobals as any).nextSteps.map((step: any) => ({
+          (contactGlobals.nextSteps?.length ?? 0) > 0
+            ? contactGlobals.nextSteps.map((step: any) => ({
                 step: step.step,
               }))
             : [],
@@ -154,7 +152,7 @@ const createPagesFromGlobals = async () => {
       layout.push({
         blockType: 'formBlock',
         form: defaultFormId,
-        enableIntro: false, // Disabled hardcoded intro text
+        enableIntro: false,
       })
     }
 
@@ -166,7 +164,7 @@ const createPagesFromGlobals = async () => {
       layout,
     }
 
-    await (payload as any).create({
+    await payload.create({
       collection: 'pages',
       data: contactPageData,
       context: { disableRevalidate: true },

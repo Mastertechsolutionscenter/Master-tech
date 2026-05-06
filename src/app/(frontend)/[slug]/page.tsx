@@ -91,9 +91,15 @@ export default async function Page({ params: paramsPromise }: Args) {
 
 export async function generateMetadata({ params: paramsPromise }: Args): Promise<Metadata> {
   const { slug = 'home' } = await paramsPromise
-  const page = await queryPageBySlug({
-    slug,
-  })
+  let page: any = null
+
+  try {
+    page = await queryPageBySlug({
+      slug,
+    })
+  } catch (error) {
+    console.error(`Error generating metadata for slug "${slug}":`, error)
+  }
 
   return generateMeta({ doc: page })
 }

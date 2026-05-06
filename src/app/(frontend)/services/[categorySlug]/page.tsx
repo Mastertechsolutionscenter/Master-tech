@@ -30,7 +30,13 @@ interface PageProps {
 
 export async function generateMetadata({ params }: PageProps) {
   const { categorySlug } = await params
-  const service = await ServiceRegistry.getBySlug(categorySlug)
+  let service: any = null
+
+  try {
+    service = await ServiceRegistry.getBySlug(categorySlug)
+  } catch (error) {
+    console.error(`Error generating metadata for service category slug "${categorySlug}":`, error)
+  }
   
   if (!service) return { title: 'Service Not Found' }
 

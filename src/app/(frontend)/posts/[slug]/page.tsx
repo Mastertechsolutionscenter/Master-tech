@@ -60,7 +60,7 @@ export default async function Post({
               className="mt-12 max-w-[52rem]"
               docs={(post.relatedPosts || []).filter(
                 (post) => post && typeof post === 'object',
-              )}
+              ) as Post[]}
             />
           )}
         </div>
@@ -81,8 +81,13 @@ export async function generateMetadata({
   params: Promise<{ slug?: string }>
 }): Promise<Metadata> {
   const { slug = '' } = await paramsPromise
+  let post: any = null
 
-  const post = await queryPostBySlug({ slug })
+  try {
+    post = await queryPostBySlug({ slug })
+  } catch (error) {
+    console.error(`Error generating metadata for post slug "${slug}":`, error)
+  }
 
   return generateMeta({ doc: post })
 }

@@ -132,6 +132,7 @@ export interface Config {
   };
   jobs: {
     tasks: {
+      weeklyLeadReport: TaskWeeklyLeadReport;
       schedulePublish: TaskSchedulePublish;
       inline: {
         input: unknown;
@@ -1453,10 +1454,23 @@ export interface Search {
   id: string;
   title?: string | null;
   priority?: number | null;
-  doc: {
-    relationTo: 'posts';
-    value: string | Post;
-  };
+  doc:
+    | {
+        relationTo: 'posts';
+        value: string | Post;
+      }
+    | {
+        relationTo: 'services';
+        value: string | Service;
+      }
+    | {
+        relationTo: 'sub-services';
+        value: string | SubService;
+      }
+    | {
+        relationTo: 'case-studies';
+        value: string | CaseStudy;
+      };
   slug?: string | null;
   meta?: {
     title?: string | null;
@@ -1526,7 +1540,7 @@ export interface PayloadJob {
     | {
         executedAt: string;
         completedAt: string;
-        taskSlug: 'inline' | 'schedulePublish';
+        taskSlug: 'inline' | 'weeklyLeadReport' | 'schedulePublish';
         taskID: string;
         input?:
           | {
@@ -1559,7 +1573,7 @@ export interface PayloadJob {
         id?: string | null;
       }[]
     | null;
-  taskSlug?: ('inline' | 'schedulePublish') | null;
+  taskSlug?: ('inline' | 'weeklyLeadReport' | 'schedulePublish') | null;
   queue?: string | null;
   waitUntil?: string | null;
   processing?: boolean | null;
@@ -3162,6 +3176,16 @@ export interface ContactSelect<T extends boolean = true> {
   updatedAt?: T;
   createdAt?: T;
   globalType?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "TaskWeeklyLeadReport".
+ */
+export interface TaskWeeklyLeadReport {
+  input: {
+    recipientEmail: string;
+  };
+  output?: unknown;
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema

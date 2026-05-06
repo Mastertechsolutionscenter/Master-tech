@@ -43,7 +43,7 @@ export const metadata: Metadata = {
 }
 
 export default async function Page() {
-  let layout = []
+  let layout: any[] = []
 
   try {
     const payload = await getPayload({ config })

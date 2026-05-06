@@ -45,10 +45,6 @@ const nextConfig = {
   },
 
   redirects,
-
-  experimental: {
-    optimizePackageImports: ['react-icons', 'lucide-react', 'motion'],
-  },
 }
 
 export default withPayload(nextConfig, {
