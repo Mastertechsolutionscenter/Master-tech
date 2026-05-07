@@ -69,19 +69,19 @@ export const HeaderClient: React.FC<HeaderClientProps> = ({ data, services }) =>
 
   return (
     <header
-      className="w-full border-b border-neutral-200 dark:border-neutral-800 bg-white/80 backdrop-blur-md dark:bg-black/80 sticky top-0 z-50"
+      className="w-full border-b border-neutral-200 dark:border-neutral-800 bg-white/80 backdrop-blur-md dark:bg-black/80 sticky top-0 z-[100]"
       {...(theme ? { 'data-theme': theme } : {})}
     >
-      <div className="mx-auto w-11/12 lg:w-4/5 flex items-center justify-between py-5">
+      <div className="mx-auto w-11/12 lg:w-4/5 flex items-center justify-between py-4 md:py-5">
 
         {/* LOGO & NAME */}
-        <Link href="/" className="flex flex-row md:flex-row items-center gap-3 flex-shrink-0">
-          <Logo loading="eager" priority="high" />
-          <div className="flex flex-col md:flex-row md:gap-3 leading-tight md:leading-normal">
-            <span className="font-bold text-base md:text-lg tracking-tight whitespace-nowrap">
+        <Link href="/" className="flex flex-col md:flex-row items-center md:items-center gap-1 md:gap-3 flex-shrink-0">
+          <Logo loading="eager" priority="high" className="h-8 w-8 md:h-14 md:w-14" />
+          <div className="flex flex-col items-center md:items-start leading-none md:leading-tight">
+            <span className="font-bold text-[8px] md:text-lg tracking-tight whitespace-nowrap">
               Master Tech
             </span>
-            <span className="font-bold text-base md:text-lg text-[#A67C00] tracking-tight whitespace-nowrap">
+            <span className="font-bold text-[8px] md:text-lg text-[#A67C00] tracking-tight whitespace-nowrap">
               Solutions
             </span>
           </div>
@@ -119,7 +119,7 @@ export const HeaderClient: React.FC<HeaderClientProps> = ({ data, services }) =>
 
           {/* MOBILE MENU TOGGLE */}
           <button 
-            className="md:hidden p-2 text-neutral-900 dark:text-white focus:outline-none"
+            className="md:hidden p-2 text-neutral-900 dark:text-white focus:outline-none relative z-[110]"
             onClick={() => setMenuOpen(!menuOpen)}
             aria-label="Toggle Menu"
           >
@@ -131,7 +131,7 @@ export const HeaderClient: React.FC<HeaderClientProps> = ({ data, services }) =>
 
       {/* MOBILE MENU OVERLAY */}
       {menuOpen && (
-        <div className="md:hidden fixed inset-0 top-[73px] bg-white dark:bg-neutral-950 z-50 overflow-y-auto animate-in fade-in slide-in-from-top-4 duration-300">
+        <div className="md:hidden fixed inset-0 top-[65px] bg-white dark:bg-neutral-950 z-[110] overflow-y-auto animate-in fade-in slide-in-from-top-4 duration-300">
           <nav className="flex flex-col p-6 gap-6 text-lg font-semibold">
             <Link 
               href="/" 
