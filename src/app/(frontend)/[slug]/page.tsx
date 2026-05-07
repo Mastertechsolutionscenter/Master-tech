@@ -13,6 +13,7 @@ import { generateMeta } from '@/utilities/generateMeta'
 import PageClient from './page.client'
 import { LivePreviewListener } from '@/components/LivePreviewListener'
 
+export const dynamic = 'force-dynamic'
 export const revalidate = 10
 
 export async function generateStaticParams() {
