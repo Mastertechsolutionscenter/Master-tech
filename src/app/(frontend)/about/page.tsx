@@ -10,7 +10,7 @@ import Image from 'next/image'
 import { getPayload } from 'payload'
 import configPromise from '@/payload.config'
 
-export const dynamic = 'force-dynamic'
+export const revalidate = 10
 
 export const metadata: Metadata = {
   title: 'About Us | Best Tech & Digital Agency in Nairobi, Kenya',

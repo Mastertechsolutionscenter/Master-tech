@@ -7,6 +7,8 @@ import { ServicesClient } from './ServicesClient'
 import { Breadcrumbs } from '@/components/Breadcrumbs'
 import { getServicesAction } from '@/services/business/actions'
 
+export const revalidate = 10
+
 export const metadata: Metadata = {
   title: 'Digital Solutions & Tech Services Nairobi | Master Tech Solutions',
   description: 'Explore our full suite of professional tech services in Kenya including custom software, cybersecurity, digital marketing, and branding.',

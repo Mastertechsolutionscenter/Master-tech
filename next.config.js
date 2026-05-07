@@ -16,6 +16,7 @@ const nextConfig = {
   },
 
   images: {
+    formats: ['image/avif', 'image/webp'],
     remotePatterns: NEXT_PUBLIC_SERVER_URL
       ? [
           (() => {

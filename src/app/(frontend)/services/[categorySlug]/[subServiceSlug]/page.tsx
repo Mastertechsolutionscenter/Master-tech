@@ -5,6 +5,8 @@ import configPromise from '@/payload.config'
 import { ServiceRegistry } from '@/services/business/ServiceRegistry'
 import SubServicePageClient from './SubServicePageClient'
 
+export const revalidate = 10
+
 interface PageProps {
   params: Promise<{
     categorySlug: string

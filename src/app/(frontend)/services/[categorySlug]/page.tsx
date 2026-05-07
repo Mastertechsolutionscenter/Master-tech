@@ -22,6 +22,8 @@ import {
   Rocket 
 } from 'lucide-react'
 
+export const revalidate = 10
+
 interface PageProps {
   params: Promise<{
     categorySlug: string

@@ -4,6 +4,8 @@ import { getPayload } from 'payload'
 import config from '@/payload.config'
 import { RenderBlocks } from '@/blocks/RenderBlocks'
 
+export const revalidate = 10
+
 export const metadata: Metadata = {
   title: 'Master Tech Solutions Center | Custom Software & E-commerce Experts Kenya',
   description: 'Nairobi’s leading software company specializing in enterprise SaaS, SEO-optimized e-commerce with M-Pesa integration, and secure UX-first digital solutions.',
