@@ -88,7 +88,6 @@ export default function Footer() {
               <li><Link href="/services">Services</Link></li>
               <li><Link href="/about">About Us</Link></li>
               <li><Link href="/contact">Contact</Link></li>
-              <li><Link href="/portal">Partner Portal</Link></li>
             </ul>
           </div>
 

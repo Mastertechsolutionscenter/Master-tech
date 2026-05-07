@@ -49,6 +49,13 @@ To further enhance my understanding and assistance for this project, here is add
 
 ---
 
+## UI & Navigation Updates (May 2026)
+- **Mobile Header Optimization:** Redesigned the branding section to stack "Master Tech" and "Solutions" below the logo on mobile devices. This creates more horizontal space for the navigation menu toggle and ensures a cleaner look on smaller screens.
+- **Footer Navigation Refinement:** Removed the "Partner Portal" link from the public footer navigation to streamline the user experience and keep the portal access private/direct.
+- **Mobile Menu Implementation:** Added a fully functional mobile navigation overlay with expandable service categories, improving accessibility for mobile users.
+
+---
+
 ## Pending Tasks & Next Steps
 - [ ] **About/Contact Page Migration:**
     - **Status:** Programmatic creation failed due to strict image field validation. Manual creation in CMS is the recommended path.

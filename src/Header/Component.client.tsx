@@ -75,11 +75,16 @@ export const HeaderClient: React.FC<HeaderClientProps> = ({ data, services }) =>
       <div className="mx-auto w-11/12 lg:w-4/5 flex items-center justify-between py-5">
 
         {/* LOGO & NAME */}
-        <Link href="/" className="flex items-center gap-3 flex-shrink-0">
+        <Link href="/" className="flex flex-row md:flex-row items-center gap-3 flex-shrink-0">
           <Logo loading="eager" priority="high" />
-          <span className="font-bold text-lg hidden sm:block tracking-tight whitespace-nowrap">
-            Master Tech <span className="text-[#A67C00]">Solutions</span>
-          </span>
+          <div className="flex flex-col md:flex-row md:gap-3 leading-tight md:leading-normal">
+            <span className="font-bold text-base md:text-lg tracking-tight whitespace-nowrap">
+              Master Tech
+            </span>
+            <span className="font-bold text-base md:text-lg text-[#A67C00] tracking-tight whitespace-nowrap">
+              Solutions
+            </span>
+          </div>
         </Link>
 
         {/* NAVIGATION - Pushed to the right */}
