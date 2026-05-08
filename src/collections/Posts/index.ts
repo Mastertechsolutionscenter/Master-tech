@@ -10,7 +10,7 @@ import {
 } from '@payloadcms/richtext-lexical'
 
 import { authenticated } from '../../access/authenticated'
-import { authenticatedOrPublished } from '../../access/authenticatedOrPublished'
+import { anyone } from '../../access/anyone'
 import { Banner } from '../../blocks/Banner/config'
 import { Code } from '../../blocks/Code/config'
 import { MediaBlock } from '../../blocks/MediaBlock/config'
@@ -32,7 +32,7 @@ export const Posts: CollectionConfig<'posts'> = {
   access: {
     create: authenticated,
     delete: authenticated,
-    read: authenticatedOrPublished,
+    read: anyone,
     update: authenticated,
   },
   // This config controls what's populated by default when a post is referenced
@@ -250,7 +250,7 @@ export const Posts: CollectionConfig<'posts'> = {
     afterRead: [populateAuthors],
     afterDelete: [revalidateDelete],
   },
-  versions: {
+  /* versions: {
     drafts: {
       autosave: {
         interval: 100, // We set this interval for optimal live preview
@@ -258,5 +258,5 @@ export const Posts: CollectionConfig<'posts'> = {
       schedulePublish: true,
     },
     maxPerDoc: 50,
-  },
+  }, */
 }

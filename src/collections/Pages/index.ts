@@ -1,7 +1,7 @@
 import type { CollectionConfig } from 'payload'
 
 import { authenticated } from '../../access/authenticated'
-import { authenticatedOrPublished } from '../../access/authenticatedOrPublished'
+import { anyone } from '../../access/anyone'
 import { Archive } from '../../blocks/ArchiveBlock/config'
 import { CallToAction } from '../../blocks/CallToAction/config'
 import { Content } from '../../blocks/Content/config'
@@ -41,7 +41,7 @@ export const Pages: CollectionConfig<'pages'> = {
   access: {
     create: authenticated,
     delete: authenticated,
-    read: authenticatedOrPublished,
+    read: anyone,
     update: authenticated,
   },
   // This config controls what's populated by default when a page is referenced
@@ -178,7 +178,7 @@ export const Pages: CollectionConfig<'pages'> = {
     beforeChange: [populatePublishedAt],
     afterDelete: [revalidateDelete],
   },
-  versions: {
+  /* versions: {
     drafts: {
       autosave: {
         interval: 100, // We set this interval for optimal live preview
@@ -186,5 +186,5 @@ export const Pages: CollectionConfig<'pages'> = {
       schedulePublish: true,
     },
     maxPerDoc: 50,
-  },
+  }, */
 }
